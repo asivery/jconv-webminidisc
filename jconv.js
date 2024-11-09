@@ -2,7 +2,7 @@
 
 	Jconv
 
-	Copyright (c) 2013-2014 narirou
+	Copyright (c) 2013 narirou
 	MIT Licensed
 
 ------------------------------------------------------- */
@@ -136,7 +136,7 @@
 
 	function ensureBuffer( buf ) {
 		buf = buf || new Buffer( 0 );
-		return ( buf instanceof Buffer ) ? buf : new Buffer( buf.toString(), 'UTF8' );
+		return ( Buffer.isBuffer(buf) ) ? buf : new Buffer( buf.toString(), 'UTF8' );
 	}
 
 	// Unicode CharCode -> UTF8 Buffer
@@ -192,9 +192,9 @@
 		convert: function( buf ) {
 			var setUtf8Buf = setUtf8Buffer;
 
-			var len     = buf.length,
+			var len        = buf.length,
 				utf8Buf = new Buffer( len * 3 ),
-				offset  = 0,
+				offset     = 0,
 				unicode;
 
 			for( var i = 0; i < len; ) {
@@ -696,7 +696,7 @@
 		name: 'SJIStoUTF8',
 
 		convert: function( buf ) {
-			var tableSjis  = tables[ 'SJIS' ],
+			var tableSjis = tables[ 'SJIS' ],
 				setUtf8Buf = setUtf8Buffer;
 
 			var len     = buf.length,
@@ -975,7 +975,7 @@
 		convert: function( buf ) {
 			var tableJis    = tables[ 'JIS' ],
 				tableJisExt = tables[ 'JISEXT' ],
-				setUtf8Buf  = setUtf8Buffer;
+				setUtf8Buf   = setUtf8Buffer;
 
 			var len      = buf.length,
 				utf8Buf  = new Buffer( len * 2 ),
@@ -1272,7 +1272,7 @@
 		convert: function( buf ) {
 			var tableJis    = tables[ 'JIS' ],
 				tableJisExt = tables[ 'JISEXT' ],
-				setUtf8Buf  = setUtf8Buffer;
+				setUtf8Buf   = setUtf8Buffer;
 
 			var len     = buf.length,
 				utf8Buf = new Buffer( len * 2 ),
